@@ -28,6 +28,7 @@ class SecurityConfig {
 
                     .authorizeRequests()
                     .antMatchers(HttpMethod.POST, "/auth/signup").permitAll()
+                    .antMatchers(HttpMethod.POST, "/auth/signin").permitAll()
                     .anyRequest().denyAll()
                     .and()
                     .build()
