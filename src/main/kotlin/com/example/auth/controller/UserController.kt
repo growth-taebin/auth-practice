@@ -1,5 +1,6 @@
 package com.example.auth.controller
 
+import com.example.auth.dto.request.SignInRequestDto
 import com.example.auth.dto.request.SignUpRequestDto
 import com.example.auth.service.UserAuthService
 import org.springframework.http.HttpStatus
@@ -19,4 +20,9 @@ class UserController(
     fun signUp(@RequestBody request: SignUpRequestDto): ResponseEntity<Any> =
             userAuthService.signUp(request)
                     .let { ResponseEntity.status(HttpStatus.CREATED).build() }
+
+    @PostMapping("/signin")
+    fun signIn(@RequestBody request: SignInRequestDto): ResponseEntity<Any> =
+            userAuthService.signIn(request)
+                    .let { ResponseEntity.ok(it) }
 }
