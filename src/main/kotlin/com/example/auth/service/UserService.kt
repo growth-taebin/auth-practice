@@ -11,11 +11,11 @@ class UserService(
         private val userRepository: UserRepository,
         private val passwordEncoder: PasswordEncoder
 ) {
-    fun signUp(id: Long, signUpRequestDto: SignUpRequestDto) {
+    fun signUp(signUpRequestDto: SignUpRequestDto) {
         if (userRepository.existsByEmail(signUpRequestDto.email)) {
             throw RuntimeException()
         }
-        userRepository.save(User(id = -1, signUpRequestDto.email, signUpRequestDto.password, signUpRequestDto.name))
+        userRepository.save(User(id = -1, signUpRequestDto.email, passwordEncoder.encode(signUpRequestDto.password), signUpRequestDto.name))
 
     }
 }
