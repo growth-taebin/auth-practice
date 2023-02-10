@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 
 @Service
-class UserService(
+class UserAuthService(
         private val userRepository: UserRepository,
         private val passwordEncoder: PasswordEncoder
 ) {
