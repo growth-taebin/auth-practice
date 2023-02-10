@@ -1,5 +1,6 @@
 package com.example.auth.service
 
+import com.example.auth.dto.request.SignInRequestDto
 import com.example.auth.dto.request.SignUpRequestDto
 import com.example.auth.entity.User
 import com.example.auth.repository.UserRepository
@@ -19,5 +20,13 @@ class UserAuthService(
         }
         userRepository.save(User(id = -1, signUpRequestDto.email, passwordEncoder.encode(signUpRequestDto.password), signUpRequestDto.name))
 
+    }
+
+    @Transactional(rollbackFor = [Exception::class])
+    fun signIn(signInRequestDto: SignInRequestDto) {
+        val user: User = userRepository.findByEmail(signInRequestDto.email) ?: throw RuntimeException()
+        if (!passwordEncoder.matches(signInRequestDto.password, user.password)) {
+            throw RuntimeException()
+        }
     }
 }
