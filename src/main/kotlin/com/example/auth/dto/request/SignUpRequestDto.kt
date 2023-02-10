@@ -1,7 +1,6 @@
-package com.example.auth.dto
+package com.example.auth.dto.request
 
-data class UserDto(
-        val id: Long,
+data class SignUpRequestDto(
         val email: String,
         val password: String,
         val name: String
