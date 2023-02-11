@@ -12,17 +12,17 @@ import org.springframework.web.bind.annotation.RestController
 
 @RestController
 @RequestMapping("auth")
-class UserController(
+class UserAuthController(
         private val userAuthService: UserAuthService
 ) {
 
     @PostMapping("/signup")
-    fun signUp(@RequestBody request: SignUpRequestDto): ResponseEntity<Any> =
+    fun signUp(@RequestBody request: SignUpRequestDto): ResponseEntity<Void> =
             userAuthService.signUp(request)
                     .let { ResponseEntity.status(HttpStatus.CREATED).build() }
 
     @PostMapping("/signin")
-    fun signIn(@RequestBody request: SignInRequestDto): ResponseEntity<Any> =
+    fun signIn(@RequestBody request: SignInRequestDto): ResponseEntity<Void> =
             userAuthService.signIn(request)
-                    .let { ResponseEntity.ok(it) }
+                    .let { ResponseEntity.ok().build() }
 }
