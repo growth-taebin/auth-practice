@@ -1,9 +1,7 @@
 package com.example.auth.entity
 
-import javax.persistence.Entity
-import javax.persistence.GeneratedValue
-import javax.persistence.GenerationType
-import javax.persistence.Id
+import com.example.auth.enumType.Authority
+import javax.persistence.*
 
 @Entity
 class User(
@@ -11,5 +9,9 @@ class User(
         val id: Long,
         val email: String,
         val password: String,
-        val name: String
+        val name: String,
+        @Enumerated(EnumType.STRING)
+        @ElementCollection
+        @CollectionTable(name = "user_authority")
+        val authority: MutableList<Authority>
 )
