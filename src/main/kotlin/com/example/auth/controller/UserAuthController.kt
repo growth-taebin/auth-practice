@@ -22,7 +22,7 @@ class UserAuthController(
                     .let { ResponseEntity.status(HttpStatus.CREATED).build() }
 
     @PostMapping("/signin")
-    fun signIn(@RequestBody request: SignInRequestDto): ResponseEntity<Void> =
+    fun signIn(@RequestBody request: SignInRequestDto): ResponseEntity<SignInRequestDto> =
             userAuthService.signIn(request)
                     .let { ResponseEntity.ok().build() }
 }
