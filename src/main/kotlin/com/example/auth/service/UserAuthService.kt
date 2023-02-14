@@ -4,6 +4,7 @@ import com.example.auth.dto.request.SignInRequestDto
 import com.example.auth.dto.request.SignUpRequestDto
 import com.example.auth.entity.User
 import com.example.auth.repository.UserRepository
+import com.example.auth.security.jwt.TokenProvider
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
@@ -11,7 +12,8 @@ import org.springframework.transaction.annotation.Transactional
 @Service
 class UserAuthService(
         private val userRepository: UserRepository,
-        private val passwordEncoder: PasswordEncoder
+        private val passwordEncoder: PasswordEncoder,
+        private val tokenProvider: TokenProvider
 ) {
     @Transactional(rollbackFor = [Exception::class])
     fun signUp(signUpRequestDto: SignUpRequestDto) {
@@ -28,5 +30,8 @@ class UserAuthService(
         if (!passwordEncoder.matches(signInRequestDto.password, user.password)) {
             throw RuntimeException()
         }
+        tokenProvider.generate(signInRequestDto.email)
+
     }
+
 }
