@@ -2,6 +2,7 @@ package com.example.auth.controller
 
 import com.example.auth.dto.request.SignInRequestDto
 import com.example.auth.dto.request.SignUpRequestDto
+import com.example.auth.dto.response.SignInResponse
 import com.example.auth.service.UserAuthService
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
@@ -22,7 +23,7 @@ class UserAuthController(
                     .let { ResponseEntity.status(HttpStatus.CREATED).build() }
 
     @PostMapping("/signin")
-    fun signIn(@RequestBody request: SignInRequestDto): ResponseEntity<SignInRequestDto> =
+    fun signIn(@RequestBody request: SignInRequestDto): ResponseEntity<SignInResponse> =
             userAuthService.signIn(request)
-                    .let { ResponseEntity.ok().build() }
+                    .let { ResponseEntity.ok(it) }
 }
