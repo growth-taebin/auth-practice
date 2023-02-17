@@ -5,6 +5,9 @@ import com.example.auth.dto.request.SignUpRequestDto
 import com.example.auth.dto.response.SignInResponse
 import com.example.auth.entity.User
 import com.example.auth.enumType.Authority
+import com.example.auth.exception.exception.DuplicateEmailException
+import com.example.auth.exception.exception.PasswordNotCorrectException
+import com.example.auth.exception.exception.UserNotFoundException
 import com.example.auth.repository.UserRepository
 import com.example.auth.security.jwt.TokenProvider
 import org.springframework.security.crypto.password.PasswordEncoder
@@ -21,7 +24,7 @@ class UserAuthService(
     @Transactional(rollbackFor = [Exception::class])
     fun signUp(signUpRequestDto: SignUpRequestDto) {
         if (userRepository.existsByEmail(signUpRequestDto.email)) {
-            throw RuntimeException()
+            throw DuplicateEmailException()
         }
         userRepository.save(User(id = -1, signUpRequestDto.email, passwordEncoder.encode(signUpRequestDto.password), signUpRequestDto.name, Collections.singletonList(Authority.ROLE_USER)))
 
@@ -29,9 +32,9 @@ class UserAuthService(
 
     @Transactional(rollbackFor = [Exception::class])
     fun signIn(signInRequestDto: SignInRequestDto): SignInResponse {
-        val user: User = userRepository.findByEmail(signInRequestDto.email) ?: throw RuntimeException()
+        val user: User = userRepository.findByEmail(signInRequestDto.email) ?: throw UserNotFoundException()
         if (!passwordEncoder.matches(signInRequestDto.password, user.password)) {
-            throw RuntimeException()
+            throw PasswordNotCorrectException()
         }
         return tokenProvider.generate(signInRequestDto.email)
 
