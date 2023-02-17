@@ -2,6 +2,7 @@ package com.example.auth.service
 
 import com.example.auth.dto.request.SignInRequestDto
 import com.example.auth.dto.request.SignUpRequestDto
+import com.example.auth.dto.response.SignInResponse
 import com.example.auth.entity.User
 import com.example.auth.enumType.Authority
 import com.example.auth.repository.UserRepository
@@ -27,12 +28,12 @@ class UserAuthService(
     }
 
     @Transactional(rollbackFor = [Exception::class])
-    fun signIn(signInRequestDto: SignInRequestDto) {
+    fun signIn(signInRequestDto: SignInRequestDto): SignInResponse {
         val user: User = userRepository.findByEmail(signInRequestDto.email) ?: throw RuntimeException()
         if (!passwordEncoder.matches(signInRequestDto.password, user.password)) {
             throw RuntimeException()
         }
-        tokenProvider.generate(signInRequestDto.email)
+        return tokenProvider.generate(signInRequestDto.email)
 
     }
 
