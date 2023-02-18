@@ -5,9 +5,7 @@ import com.example.auth.dto.request.SignUpRequestDto
 import com.example.auth.dto.response.SignInResponse
 import com.example.auth.entity.User
 import com.example.auth.enumType.Authority
-import com.example.auth.exception.exception.DuplicateEmailException
-import com.example.auth.exception.exception.PasswordNotCorrectException
-import com.example.auth.exception.exception.UserNotFoundException
+import com.example.auth.exception.exception.*
 import com.example.auth.repository.UserRepository
 import com.example.auth.security.jwt.TokenProvider
 import org.springframework.security.crypto.password.PasswordEncoder
@@ -38,6 +36,14 @@ class UserAuthService(
         }
         return tokenProvider.generate(signInRequestDto.email)
 
+    }
+
+    fun reissueToken(reqToken: String):  SignInResponse{
+        val refreshToken = tokenProvider.parseRefreshToken(reqToken) ?: throw InvalidTokenException()
+        if(tokenProvider.isRefreshTokenExpired(refreshToken)) {
+            throw ExpiredRefreshTokenException()
+        }
+        return tokenProvider.generate(tokenProvider.exactEmailFromRefreshToken(refreshToken))
     }
 
 }
