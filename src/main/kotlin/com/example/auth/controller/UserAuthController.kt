@@ -6,8 +6,10 @@ import com.example.auth.dto.response.SignInResponse
 import com.example.auth.service.UserAuthService
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
+import org.springframework.web.bind.annotation.PatchMapping
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
+import org.springframework.web.bind.annotation.RequestHeader
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 
@@ -25,5 +27,10 @@ class UserAuthController(
     @PostMapping("/signin")
     fun signIn(@RequestBody request: SignInRequestDto): ResponseEntity<SignInResponse> =
             userAuthService.signIn(request)
+                    .let { ResponseEntity.ok(it) }
+
+    @PatchMapping
+    fun reissueToken(@RequestHeader refreshToken: String): ResponseEntity<SignInResponse> =
+            userAuthService.reissueToken(refreshToken)
                     .let { ResponseEntity.ok(it) }
 }
