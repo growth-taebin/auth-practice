@@ -29,7 +29,7 @@ class UserAuthController(
             userAuthService.signIn(request)
                     .let { ResponseEntity.ok(it) }
 
-    @PatchMapping
+    @PatchMapping("/reissue")
     fun reissueToken(@RequestHeader refreshToken: String): ResponseEntity<SignInResponse> =
             userAuthService.reissueToken(refreshToken)
                     .let { ResponseEntity.ok(it) }
