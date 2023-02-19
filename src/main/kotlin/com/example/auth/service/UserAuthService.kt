@@ -38,9 +38,11 @@ class UserAuthService(
 
     }
 
-    fun reissueToken(reqToken: String):  SignInResponse{
-        val refreshToken = tokenProvider.parseRefreshToken(reqToken) ?: throw InvalidTokenException()
+    fun reissueToken(refreshToken: String):  SignInResponse {
+        val refreshToken = tokenProvider.parseRefreshToken(refreshToken) ?: throw InvalidTokenException()
+        println(refreshToken)
         if(tokenProvider.isRefreshTokenExpired(refreshToken)) {
+            println(tokenProvider.isRefreshTokenExpired(refreshToken))
             throw ExpiredRefreshTokenException()
         }
         return tokenProvider.generate(tokenProvider.exactEmailFromRefreshToken(refreshToken))

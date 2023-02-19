@@ -51,7 +51,7 @@ class TokenProvider(
             Jwts.parserBuilder()
                     .setSigningKey(secret)
                     .build()
-                    .parseClaimsJwt(token)
+                    .parseClaimsJws(token)
                     .body
 
     fun authentication(accessToken: String): Authentication =
@@ -61,10 +61,12 @@ class TokenProvider(
     fun exactEmailFromRefreshToken(token: String): String =
             getTokenBody(token, jwtProperties.refreshSecret).subject
 
+
     fun isRefreshTokenExpired(token: String): Boolean {
         runCatching {
             getTokenBody(token, jwtProperties.refreshSecret).expiration
         }.onFailure {
+            println(it.message)
             return true
         }
         return false
