@@ -1,9 +1,9 @@
-package com.example.auth.domain.presentation
+package com.example.auth.domain.user.presentation
 
-import com.example.auth.domain.presentation.data.dto.request.SignInRequestDto
-import com.example.auth.domain.presentation.data.dto.request.SignUpRequestDto
-import com.example.auth.domain.presentation.data.dto.response.SignInResponse
-import com.example.auth.domain.service.UserAuthService
+import com.example.auth.domain.user.presentation.data.dto.request.SignInRequestDto
+import com.example.auth.domain.user.presentation.data.dto.request.SignUpRequestDto
+import com.example.auth.domain.user.presentation.data.dto.response.SignInResponse
+import com.example.auth.domain.user.service.UserAuthService
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.PatchMapping

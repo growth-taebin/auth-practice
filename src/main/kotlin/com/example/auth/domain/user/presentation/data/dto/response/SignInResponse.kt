@@ -1,4 +1,4 @@
-package com.example.auth.domain.presentation.data.dto.response
+package com.example.auth.domain.user.presentation.data.dto.response
 
 import com.fasterxml.jackson.annotation.JsonFormat
 import java.time.LocalDateTime

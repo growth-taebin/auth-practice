@@ -1,8 +1,8 @@
 package com.example.auth.global.security.jwt
 
-import com.example.auth.domain.presentation.data.dto.response.SignInResponse
-import com.example.auth.domain.entity.RefreshToken
-import com.example.auth.domain.repository.RefreshTokenRepository
+import com.example.auth.domain.user.presentation.data.dto.response.SignInResponse
+import com.example.auth.domain.user.entity.RefreshToken
+import com.example.auth.domain.user.repository.RefreshTokenRepository
 import com.example.auth.global.security.authentication.AuthDetailsService
 import com.example.auth.global.security.jwt.properties.JwtProperties
 import io.jsonwebtoken.Claims

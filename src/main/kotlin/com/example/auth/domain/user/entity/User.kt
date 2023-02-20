@@ -1,6 +1,6 @@
-package com.example.auth.domain.entity
+package com.example.auth.domain.user.entity
 
-import com.example.auth.domain.presentation.data.enumType.Authority
+import com.example.auth.domain.user.presentation.data.enumType.Authority
 import javax.persistence.*
 
 @Entity

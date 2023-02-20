@@ -1,6 +1,6 @@
 package com.example.auth.global.security.authentication
 
-import com.example.auth.domain.repository.UserRepository
+import com.example.auth.domain.user.repository.UserRepository
 import org.springframework.security.core.userdetails.UserDetails
 import org.springframework.security.core.userdetails.UserDetailsService
 import org.springframework.stereotype.Service

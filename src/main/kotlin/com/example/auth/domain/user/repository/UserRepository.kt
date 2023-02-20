@@ -1,6 +1,6 @@
-package com.example.auth.domain.repository
+package com.example.auth.domain.user.repository
 
-import com.example.auth.domain.entity.User
+import com.example.auth.domain.user.entity.User
 import org.springframework.data.jpa.repository.JpaRepository
 
 interface UserRepository : JpaRepository<User, Long> {

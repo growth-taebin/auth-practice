@@ -1,13 +1,14 @@
-package com.example.auth.domain.service
+package com.example.auth.domain.user.service
 
-import com.example.auth.domain.presentation.data.dto.request.SignInRequestDto
-import com.example.auth.domain.presentation.data.dto.request.SignUpRequestDto
-import com.example.auth.domain.presentation.data.dto.response.SignInResponse
-import com.example.auth.domain.entity.User
+import com.example.auth.domain.user.presentation.data.dto.request.SignInRequestDto
+import com.example.auth.domain.user.presentation.data.dto.request.SignUpRequestDto
+import com.example.auth.domain.user.presentation.data.dto.response.SignInResponse
+import com.example.auth.domain.user.entity.User
 import com.example.auth.domain.exception.*
-import com.example.auth.domain.presentation.data.enumType.Authority
+import com.example.auth.domain.user.presentation.data.enumType.Authority
 import com.example.auth.exception.exception.*
-import com.example.auth.domain.repository.UserRepository
+import com.example.auth.domain.user.repository.UserRepository
+import com.example.auth.domain.user.exception.*
 import com.example.auth.global.security.jwt.TokenProvider
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
