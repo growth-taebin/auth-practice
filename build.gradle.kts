@@ -30,6 +30,7 @@ dependencies {
 
 	// database
 	runtimeOnly("com.mysql:mysql-connector-j")
+	implementation("org.springframework.boot:spring-boot-starter-data-redis")
 
 	//test
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
@@ -55,3 +56,4 @@ tasks.withType<KotlinCompile> {
 tasks.withType<Test> {
 	useJUnitPlatform()
 }
+
