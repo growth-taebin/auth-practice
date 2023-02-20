@@ -67,7 +67,6 @@ class TokenProvider(
         runCatching {
             getTokenBody(token, jwtProperties.refreshSecret).expiration
         }.onFailure {
-            println(it.message)
             return true
         }
         return false
